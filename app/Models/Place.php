@@ -13,4 +13,9 @@ class Place extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function getImageAttribute($image)
+    {
+        return asset('storage/images/' . $image);
+    }
 }
