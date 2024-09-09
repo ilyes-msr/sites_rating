@@ -16,3 +16,17 @@
     </div>
   </div>
 </form>
+
+<section class="m-auto text-center">
+  <div class="category mt-5">
+    <ul>
+      @foreach($categories as $category)
+        <li>
+          <a href="{{route('category.show', $category->slug)}}" class="bg-blue-900 hover:bg-gray-400">
+            {{$category->title}}
+          </a>
+        </li>
+      @endforeach
+    </ul>
+  </div>
+</section>
