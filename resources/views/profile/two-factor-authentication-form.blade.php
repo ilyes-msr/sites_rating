@@ -76,10 +76,10 @@
             @endif
         @endif
 
-        <div class="mt-5">
+        <div class="mt-5 justify-start">
             @if (! $this->enabled)
                 <x-confirms-password wire:then="enableTwoFactorAuthentication">
-                    <x-button type="button" wire:loading.attr="disabled">
+                    <x-button type="button" wire:loading.attr="disabled" class="">
                         {{ __('Enable') }}
                     </x-button>
                 </x-confirms-password>
