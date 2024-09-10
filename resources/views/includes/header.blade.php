@@ -1,12 +1,16 @@
-<form action="" method="POST">
+<form action="{{route('search')}}" method="POST">
   @csrf
   <div class="flex flex-rox p-5">
     <div class="w-6/12">
-      <input type="text" name="address" id="address" autocomplete="off" class="p-2 w-full bg-gray-200 rounded-md">
+      <input type="text" name="address" id="address" autocomplete="off" class="p-2 w-full bg-gray-200 rounded-md" value="{{ $keyword ?? '' }}">
+      <div id="address-suggestions"></div>
     </div>
     <div class="w-6/12">
-      <select name="category" id="category" class="p-1 mr-5 bg-gray-200 w-full rounded-md">
+      <select name="category" id="category" class="p-1 mr-5 bg-gray-200 w-full rounded-md appearance-none text-gray-700 pr-8">
         <option value="">حدّد التصنيف</option>
+        @foreach ($categories as $category)
+            <option value="{{$category->id}}" {{ isset($category_id) && $category->id == $category_id ? 'selected' : ''}}>{{$category->title}}</option>
+        @endforeach
       </select>
     </div>
     <div class="mr-5">

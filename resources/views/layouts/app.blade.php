@@ -18,6 +18,9 @@
 
         <!-- Styles -->
         @livewireStyles
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     </head>
     <body class="font-sans antialiased">
         <x-banner />
@@ -43,5 +46,43 @@
         @stack('modals')
 
         @livewireScripts
+
+        <script>
+            $(function() {
+                const addressSuggestions = document.querySelector('#address-suggestions');
+                var debounceTimer;
+
+                    $('#address').on('keyup', function(e) {
+                    // console.log(e.target.value)
+                    $('#address-suggestions').fadeIn();
+                    clearTimeout(debounceTimer);
+
+                    debounceTimer = setTimeout(() => {
+
+                    $.ajax({
+                        url: "{{ route('auto-complete') }}", 
+                        method: "GET",
+                        data: { address: e.target.value },
+                        dataType: "json",
+                        success: function(response) {
+                            // console.log(response);
+                            addressSuggestions.innerHTML = response;
+                            
+                            $('#address-suggestions li').on('click', function(e) {
+                                $('#address').val(e.target.textContent);
+                            $('#address-suggestions').fadeOut();
+
+                            })
+                        },
+                        error: function(xhr, status, error) {
+                            // console.error('Error: ' + error);
+                        }
+                    });
+                }, 300);
+                })
+
+                
+            })
+        </script>
     </body>
 </html>
