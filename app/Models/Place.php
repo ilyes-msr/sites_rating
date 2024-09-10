@@ -13,6 +13,11 @@ class Place extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\Review');
+    }
+
 
     public function getImageAttribute($image)
     {
@@ -30,5 +35,10 @@ class Place extends Model
         }
 
         return $query;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

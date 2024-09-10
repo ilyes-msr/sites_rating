@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Place;
+use App\Models\Review;
+use App\Traits\RateableTrait;
 use Illuminate\Http\Request;
 
 class PlaceController extends Controller
 {
+    use RateableTrait;
     /**
      * Display a listing of the resource.
      *
@@ -33,10 +36,7 @@ class PlaceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
@@ -46,7 +46,17 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
-        //
+        $place = Place::withCount('reviews')->with(['reviews' => function ($query) {}])->find($place->id);
+
+        $avg = $this->averageRating($place);
+
+        $total = $avg['total'];
+        $service_rating = $avg['service_rating'];
+        $quality_rating = $avg['quality_rating'];
+        $cleanliness_rating = $avg['cleanliness_rating'];
+        $pricing_rating = $avg['pricing_rating'];
+
+        return view('details', compact('place', 'total', 'service_rating', 'quality_rating', 'cleanliness_rating', 'pricing_rating'));
     }
 
     /**
