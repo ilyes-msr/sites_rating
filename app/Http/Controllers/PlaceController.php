@@ -46,7 +46,10 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
-        $place = Place::withCount('reviews')->with(['reviews' => function ($query) {}])->find($place->id);
+        $place = Place::withCount('reviews')->with(['reviews' => function ($query) {
+            $query->with('user')
+                ->withCount('likes');
+        }])->find($place->id);
 
         $avg = $this->averageRating($place);
 

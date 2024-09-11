@@ -6,7 +6,7 @@
       <div id="address-suggestions"></div>
     </div>
     <div class="w-6/12">
-      <select name="category" id="category" class="p-1 mr-5 bg-gray-200 w-full rounded-md appearance-none text-gray-700 pr-8">
+      <select name="category" id="category" class="p-2 mr-5 bg-gray-200 w-full rounded-md appearance-none text-gray-700 pr-8">
         <option value="">حدّد التصنيف</option>
         @foreach ($categories as $category)
             <option value="{{$category->id}}" {{ isset($category_id) && $category->id == $category_id ? 'selected' : ''}}>{{$category->title}}</option>
