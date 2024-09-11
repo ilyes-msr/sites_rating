@@ -134,10 +134,15 @@
 
                                 <div class="mt-3">
                                     @auth
+                                    @can('like-review', $review)
+
                                     <button id="like" type="button" data-id="{{$review->id}}" class="border rounded p-1 text-xs like">
+
                                         {!! Auth::user()->alreadyliked($review->id) ? '<i class="fa fa-thumbs-down"></i><small> إلغاء الإعجاب </small>' : '<i class="fa fa-thumbs-up"></i><small> أعجبني </small>' !!}
                                         <span>{{ $review->likes_count }}</span>
                                     </button>
+                                    @endcan
+
                                     @else
                                         <span class="border rounded text-xs p-1"><i class="fa fa-thumbs-up"></i> {{ $review->likes_count }}</span>
                                     @endauth                                 
@@ -164,50 +169,63 @@
                         <div class="">
                             <div class="rating float-right" >
                                 <h5>الخدمة</h5>
-                                <input type="radio" id="rating_service1" name="service_rating" value="5" /><label for="rating_service1" title="ممتاز"></label>
-                                <input type="radio" id="rating_service2" name="service_rating" value="4" /><label for="rating_service2" title="جيد جدًا"></label>
-                                <input type="radio" id="rating_service3" name="service_rating" value="3" /><label for="rating_service3" title="متوسط"></label>
-                                <input type="radio" id="rating_service4" name="service_rating" value="2" /><label for="rating_service4" title="سيء"></label>
-                                <input type="radio" id="rating_service5" name="service_rating" value="1" /><label for="rating_service5" title="سيء للغاية"></label>
+                                <input type="radio" id="rating_service1" name="service_rating" value="5" {{old('service_rating') == 5 ? 'checked' : ''}}/><label for="rating_service1" title="ممتاز"></label>
+                                <input type="radio" id="rating_service2" name="service_rating" value="4" {{old('service_rating') == 4 ? 'checked' : ''}}/><label for="rating_service2" title="جيد جدًا"></label>
+                                <input type="radio" id="rating_service3" name="service_rating" value="3" {{old('service_rating') == 3 ? 'checked' : ''}}/><label for="rating_service3" title="متوسط"></label>
+                                <input type="radio" id="rating_service4" name="service_rating" value="2" {{old('service_rating') == 2 ? 'checked' : ''}}/><label for="rating_service4" title="سيء"></label>
+                                <input type="radio" id="rating_service5" name="service_rating" value="1" {{old('service_rating') == 1 ? 'checked' : ''}}/><label for="rating_service5" title="سيء للغاية"></label>
                             </div>
+                            @error('service_rating')
+                                <span class="bg-red-200 text-red-400 py-1 rounded-md px-2">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="">
                             <div class="rating float-right">
                                 <h5>الجودة</h5>
-                                <input type="radio" id="rating_quality1" name="quality_rating" value="5" /><label for="rating_quality1" title="ممتاز"></label>
-                                <input type="radio" id="rating_quality2" name="quality_rating" value="4" /><label for="rating_quality2" title="جيد جدًا"></label>
-                                <input type="radio" id="rating_quality3" name="quality_rating" value="3" /><label for="rating_quality3" title="متوسط"></label>
-                                <input type="radio" id="rating_quality4" name="quality_rating" value="2" /><label for="rating_quality4" title="سيء"></label>
-                                <input type="radio" id="rating_quality5" name="quality_rating" value="1" /><label for="rating_quality5" title="سيء للغاية"></label>
+                                <input type="radio" id="rating_quality1" name="quality_rating" value="5" {{old('quality_rating') == 5 ? 'checked' : ''}}/><label for="rating_quality1" title="ممتاز"></label>
+                                <input type="radio" id="rating_quality2" name="quality_rating" value="4" {{old('quality_rating') == 4 ? 'checked' : ''}}/><label for="rating_quality2" title="جيد جدًا"></label>
+                                <input type="radio" id="rating_quality3" name="quality_rating" value="3" {{old('quality_rating') == 3 ? 'checked' : ''}}/><label for="rating_quality3" title="متوسط"></label>
+                                <input type="radio" id="rating_quality4" name="quality_rating" value="2" {{old('quality_rating') == 2 ? 'checked' : ''}}/><label for="rating_quality4" title="سيء"></label>
+                                <input type="radio" id="rating_quality5" name="quality_rating" value="1" {{old('quality_rating') == 1 ? 'checked' : ''}}/><label for="rating_quality5" title="سيء للغاية"></label>
                             </div>
+                            @error('quality_rating')
+                                <span class="bg-red-200 text-red-400 py-1 rounded-md px-2">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="grid grid-cols-2">
                         <div class="">
                             <div class="rating float-right">
                                 <h5>النظافة</h5>
-                                <input type="radio" id="rating_cleanliness1" name="cleanliness_rating" value="5" /><label for="rating_cleanliness1" title="ممتاز"></label>
-                                <input type="radio" id="rating_cleanliness2" name="cleanliness_rating" value="4" /><label for="rating_cleanliness2" title="جيد جدًا"></label>
-                                <input type="radio" id="rating_cleanliness3" name="cleanliness_rating" value="3" /><label for="rating_cleanliness3" title="متوسط"></label>
-                                <input type="radio" id="rating_cleanliness4" name="cleanliness_rating" value="2" /><label for="rating_cleanliness4" title="سيء"></label>
-                                <input type="radio" id="rating_cleanliness5" name="cleanliness_rating" value="1" /><label for="rating_cleanliness5" title="سيء للغاية"></label>
+                                <input type="radio" id="rating_cleanliness1" name="cleanliness_rating" value="5" {{old('cleanliness_rating') == 5 ? 'checked' : ''}}/><label for="rating_cleanliness1" title="ممتاز"></label>
+                                <input type="radio" id="rating_cleanliness2" name="cleanliness_rating" value="4" {{old('cleanliness_rating') == 4 ? 'checked' : ''}}/><label for="rating_cleanliness2" title="جيد جدًا"></label>
+                                <input type="radio" id="rating_cleanliness3" name="cleanliness_rating" value="3" {{old('cleanliness_rating') == 3 ? 'checked' : ''}}/><label for="rating_cleanliness3" title="متوسط"></label>
+                                <input type="radio" id="rating_cleanliness4" name="cleanliness_rating" value="2" {{old('cleanliness_rating') == 2 ? 'checked' : ''}}/><label for="rating_cleanliness4" title="سيء"></label>
+                                <input type="radio" id="rating_cleanliness5" name="cleanliness_rating" value="1" {{old('cleanliness_rating') == 1 ? 'checked' : ''}}/><label for="rating_cleanliness5" title="سيء للغاية"></label>
                             </div>
+                            @error('cleanliness_rating')
+                                <span class="bg-red-200 text-red-400 py-1 rounded-md px-2">{{$message}}</span>
+                            @enderror
                         </div>
+
                         <div class="">
                             <div class="rating float-right">
                                 <h5>السعر</h5>
-                                <input type="radio" id="rating_price1" name="pricing_rating" value="5" /><label for="rating_price1" title="ممتاز"></label>
-                                <input type="radio" id="rating_price2" name="pricing_rating" value="4" /><label for="rating_price2" title="جيد جدًا"></label>
-                                <input type="radio" id="rating_price3" name="pricing_rating" value="3" /><label for="rating_price3" title="متوسط"></label>
-                                <input type="radio" id="rating_price4" name="pricing_rating" value="2" /><label for="rating_price4" title="سيء"></label>
-                                <input type="radio" id="rating_price5" name="pricing_rating" value="1" /><label for="rating_price5" title="سيء للغاية"></label>
+                                <input type="radio" id="rating_price1" name="pricing_rating" value="5" {{old('pricing_rating') == 5 ? 'checked' : ''}} /><label for="rating_price1" title="ممتاز"></label>
+                                <input type="radio" id="rating_price2" name="pricing_rating" value="4" {{old('pricing_rating') == 4 ? 'checked' : ''}}/><label for="rating_price2" title="جيد جدًا"></label>
+                                <input type="radio" id="rating_price3" name="pricing_rating" value="3" {{old('pricing_rating') == 3 ? 'checked' : ''}}/><label for="rating_price3" title="متوسط"></label>
+                                <input type="radio" id="rating_price4" name="pricing_rating" value="2" {{old('pricing_rating') == 2 ? 'checked' : ''}}/><label for="rating_price4" title="سيء"></label>
+                                <input type="radio" id="rating_price5" name="pricing_rating" value="1" {{old('pricing_rating') == 1 ? 'checked' : ''}}/><label for="rating_price5" title="سيء للغاية"></label>
                             </div>
+                            @error('pricing_rating')
+                            <span class="bg-red-200 text-red-400 py-1 rounded-md px-2">{{$message}}</span>
+                        @enderror
                         </div>
                     </div>
 
                     <div class="mt-4">
                         <div class="form-group">
-                            <textarea class="border w-full" name="review" id="review" cols="30" rows="9"></textarea>
+                            <textarea class="border w-full" name="review" id="review" cols="30" rows="9">{{old('review')}}</textarea>
                         </div> 
                         @error('review')
                             <x-alert color="red" message="{{ $message }}" />

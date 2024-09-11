@@ -51,6 +51,7 @@ class PlaceController extends Controller
                 ->withCount('likes');
         }])->find($place->id);
 
+        // dd($place);
         $avg = $this->averageRating($place);
 
         $total = $avg['total'];

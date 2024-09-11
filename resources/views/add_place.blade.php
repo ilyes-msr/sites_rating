@@ -15,7 +15,7 @@
               </div>
               <div class="">
                   <label for="catg"> اختر التصنيف</label>
-                  <select class="w-full mt-2 mb-6 px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-400" name="category_id" >
+                  <select class="w-full mt-2 mb-6 pl-4 py-2 pr-8 border rounded-lg text-gray-700 focus:outline-none focus:border-blue-400" name="category_id" >
                   <option value="">التصنيف</option>
                   @foreach($categories as $category)
                     <option value="{{$category->id}}">{{$category->title}}</option>

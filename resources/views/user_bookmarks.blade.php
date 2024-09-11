@@ -25,7 +25,9 @@
                   </div>
                   <div class="flex space-x-3 mb-4 text-sm font-medium mt-5">
                       <div class="flex-auto flex space-x-3">
-                          <a href="{{ route('place.show', [$place->id, $place->slug]) }}" class="w-15 h-8 flex items-center justify-center rounded-md border border-gray-300">عرض</a>
+                          <a href="{{ route('place.show', [$place->id, $place->slug]) }}" class="w-15 h-8 flex items-center justify-center rounded-md border bg-indigo-400 py-3 px-9 text-white hover:bg-indigo-700">
+                            عرض
+                          </a>
                       </div>
                   </div>
               </div>
