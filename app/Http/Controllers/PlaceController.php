@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Place;
 use App\Models\Review;
 use App\Traits\RateableTrait;
@@ -27,23 +28,13 @@ class PlaceController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+
+        return view('add_place', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request) {}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Place  $place
-     * @return \Illuminate\Http\Response
-     */
     public function show(Place $place)
     {
         $place = Place::withCount('reviews')->with(['reviews' => function ($query) {
@@ -62,35 +53,16 @@ class PlaceController extends Controller
         return view('details', compact('place', 'total', 'service_rating', 'quality_rating', 'cleanliness_rating', 'pricing_rating'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Place  $place
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Place $place)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Place  $place
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Place $place)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Place  $place
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Place $place)
     {
         //

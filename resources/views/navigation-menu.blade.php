@@ -15,6 +15,10 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" class="text-white">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link href="{{ route('place.create') }}" :active="request()->routeIs('place.create')" class="text-white">
+                        {{ __('انشاء موقع') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -158,6 +162,9 @@
         </div>
 
         @auth
+        <x-responsive-nav-link href="{{ route('place.create') }}" :active="request()->routeIs('place.create')">
+            {{ __('انشاء موقع') }}
+        </x-responsive-nav-link>
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">

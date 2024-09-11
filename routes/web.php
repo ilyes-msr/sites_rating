@@ -30,6 +30,8 @@ Route::get('/', [PlaceController::class, 'index'])->name('home');
 
 Route::resource('report', ContactController::class, ['only' => ['create', 'store']]);
 
+Route::get('/place/create', [PlaceController::class, 'create'])->name('place.create');
+Route::post('/place', [PlaceController::class, 'store'])->name('place.store');
 
 Route::get('/{place}/{slug}', [PlaceController::class, 'show'])->name('place.show');
 
