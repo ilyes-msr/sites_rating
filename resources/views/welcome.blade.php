@@ -9,7 +9,7 @@
             <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
                 <article class="overflow-hidden rounded-lg shadow-lg bg-white">
                     <a href="{{route('place.show', [$place->id, $place->slug])}}">
-                        <img alt="Placeholder" class="block h-auto w-full" src="{{ $place->image }}">
+                        <img alt="Placeholder" class="block h-auto w-full" src="{{ $place->image }}" style="height: 250px; object-fit: cover">
                     </a>
                     <header class="items-center justify-between leading-tight p-2 md:p-4">
                         <h1 class="text-base mb-3">

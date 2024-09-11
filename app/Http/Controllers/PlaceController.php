@@ -18,7 +18,7 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        return view('welcome', ['places' => Place::orderBy('view_count', 'desc')->take(3)->get()]);
+        return view('welcome', ['places' => Place::orderBy('view_count', 'desc')->take(6)->get()]);
     }
 
     /**
@@ -33,7 +33,16 @@ class PlaceController extends Controller
         return view('add_place', compact('categories'));
     }
 
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+        if ($request->image) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->storeAs('public\images', $imageName);
+            $request->user()->places()->create($request->except('image') + ['image' => $imageName]);
+        } else {
+            $request->user()->places()->create($request->all());
+        }
+    }
 
     public function show(Place $place)
     {
