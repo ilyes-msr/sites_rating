@@ -15,6 +15,7 @@ class Place extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
     public function reviews()
     {
         return $this->hasMany('App\Models\Review');
@@ -48,5 +49,10 @@ class Place extends Model
     {
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = Slug::uniqueSlug($value, 'places');
+    }
+
+    public function bookmarks()
+    {
+        return $this->belongsToMany(User::class, 'bookmarks');
     }
 }

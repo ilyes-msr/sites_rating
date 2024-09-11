@@ -119,6 +119,10 @@
                                 {{ __('الحساب') }}
                             </x-dropdown-link>
 
+                            <x-dropdown-link href="{{ route('bookmarks') }}">
+                                {{ __('الإشارات المرجعية') }}
+                            </x-dropdown-link>
+
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">
                                     {{ __('API Tokens') }}
@@ -154,35 +158,40 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden text-white">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')" class="text-white  text-right text-right">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
 
         @auth
-        <x-responsive-nav-link href="{{ route('place.create') }}" :active="request()->routeIs('place.create')">
+        <x-responsive-nav-link href="{{ route('place.create') }}" :active="request()->routeIs('place.create')" class="text-white  text-right">
             {{ __('انشاء موقع') }}
         </x-responsive-nav-link>
+
+        <x-dropdown-link href="{{ route('bookmarks') }}" :active="request()->routeIs('bookmarks')" class="text-white  text-right">
+            {{ __('الإشارات المرجعية') }}
+        </x-dropdown-link>
+
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="shrink-0 mr-3">
-                        <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                        <img class="h-10 w-10 rounded-full object-cover ml-4" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                     </div>
                 @endif
 
                 <div>
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    <div class="font-medium text-base text-white  text-right">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-white  text-right">{{ Auth::user()->email }}</div>
                 </div>
             </div>
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+                <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')" class="text-white  text-right">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
@@ -197,7 +206,7 @@
                     @csrf
 
                     <x-responsive-nav-link href="{{ route('logout') }}"
-                                   @click.prevent="$root.submit();">
+                                   @click.prevent="$root.submit();" class="text-white  text-right">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
