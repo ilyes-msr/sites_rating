@@ -88,4 +88,9 @@ class User extends Authenticatable
     {
         return $this->bookmarks()->wherePlace_id($place_id)->exists();
     }
+
+    public function isOwner()
+    {
+        return $this->role_id == 1;
+    }
 }

@@ -16,6 +16,12 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(Place $place)
+    {
+        $this->middleware('role')->only('create', 'store');
+    }
+
     public function index()
     {
         return view('welcome', ['places' => Place::orderBy('view_count', 'desc')->take(6)->get()]);

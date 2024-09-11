@@ -16,9 +16,11 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    @owner
                     <x-nav-link href="{{ route('place.create') }}" :active="request()->routeIs('place.create')" class="text-white">
                         {{ __('انشاء موقع') }}
                     </x-nav-link>
+                    @endowner
                 </div>
             </div>
 
@@ -166,10 +168,11 @@
         </div>
 
         @auth
+        @owner
         <x-responsive-nav-link href="{{ route('place.create') }}" :active="request()->routeIs('place.create')" class="text-white  text-right">
             {{ __('انشاء موقع') }}
         </x-responsive-nav-link>
-
+        @endowner
         <x-dropdown-link href="{{ route('bookmarks') }}" :active="request()->routeIs('bookmarks')" class="text-white  text-right">
             {{ __('الإشارات المرجعية') }}
         </x-dropdown-link>
